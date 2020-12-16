@@ -1,12 +1,13 @@
 from selenium import webdriver
 import time
+import sys
 
 class MyBot:
-    def __init__(self, credentials):
-        self.CREDENTIALS = credentials
-        self.bot = webdriver.Chrome('chromedriver.exe')
-        self.bot.get('https://teams.microsoft.com')
-        time.sleep(5)
+    # def __init__(self, credentials):
+    #     self.CREDENTIALS = credentials
+    #     self.bot = webdriver.Chrome('chromedriver.exe')
+    #     self.bot.get('https://teams.microsoft.com')
+    #     time.sleep(5)
 
     def Login(self):
         # Inputting email in input box
@@ -36,6 +37,16 @@ class MyBot:
         btn_useWebApp = self.bot.find_element_by_xpath('//*[@id="download-desktop-page"]/div/a')
         btn_useWebApp.click()
 
+    def getClassSchedule(self):
+        try:
+            with open('classSchedule.txt') as f:
+                schedule_lst = f.read().split('\n')
+                return schedule_lst
+
+        except Exception as e:
+            print(e)
+            sys.exit(1)
+            
 
 
 credentials = {'email':'', 'password':''}
@@ -47,5 +58,7 @@ with open('credentials.txt') as f:
     credentials['password'] = content_lst[1]
 
 if __name__ == '__main__':
-    bot = MyBot(credentials)
-    bot.Login()
+    # bot = MyBot(credentials)
+    bot = MyBot()
+    bot.getClassSchedule()
+    # bot.Login()
