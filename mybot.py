@@ -88,7 +88,7 @@ class MyBot:
         time.sleep(20)
         for _ in range(7):
             keyboard.send('tab', do_press=True, do_release=True)
-            keyboard.send('enter', do_press=True, do_release=True)
+        keyboard.send('enter', do_press=True, do_release=True)
 
 
 
